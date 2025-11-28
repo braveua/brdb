@@ -1,0 +1,14 @@
+# Test library
+
+
+# My Library
+
+[![GitHub stars](https://img.shields.io/github/stars/username/my_library?style=social)](https://github.com/username/my_library)
+
+**My Library** – небольшая утилита для работы с данными.
+
+## 📦 Установка
+
+```bash
+pip install my_library
+```
