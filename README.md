@@ -1,14 +1,10 @@
-# Test library
-
-
-# My Library
-
+# brdb
 [![GitHub stars](https://img.shields.io/github/stars/braveua/brdb?style=social)](https://github.com/braveua/brdb)
 
-**My Library** – небольшая утилита для работы с данными.
+**brdb** – lib for ora db.
 
 ## 📦 Установка
 
 ```bash
-pip install my_library
+uv add brdb
 ```

@@ -19,5 +19,5 @@ build-backend = "uv_build"
 [project.urls]
 Homepage = "https://mywebsite.example.com"
 Documentation = "https://mywebsite.example.com/docs"
-Repository = "https://github.com/username/my_library"
-"Bug Tracker" = "https://github.com/username/my_library/issues"
+Repository = "https://github.com/braveua/brdb"
+"Bug Tracker" = "https://github.com/braveua/brdb/issues"
