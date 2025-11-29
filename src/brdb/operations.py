@@ -28,6 +28,10 @@ def connect(domain: str|None = None):
     return config.conn, config.cur, config.shopid
 
 def save_shop_rec(rec: dict):
+    if config.cur is None:
+        raise RuntimeError("DB cursor is not initialized. Call connect() first.")
+    if config.shopid is None:
+        raise RuntimeError("Shop ID is not initialized. Call connect() first.")
     config.cur.callproc(
         "sh.insert_price",
         (

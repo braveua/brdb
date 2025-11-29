@@ -16,6 +16,11 @@ brdb = "brdb:main"
 requires = ["uv_build>=0.9.1,<0.10.0"]
 build-backend = "uv_build"
 
+[dependency-groups]
+dev = [
+    "oracledb>=3.4.1",
+]
+
 [project.urls]
 Homepage = "https://mywebsite.example.com"
 Documentation = "https://mywebsite.example.com/docs"

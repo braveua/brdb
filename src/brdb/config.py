@@ -1,3 +1,4 @@
+from oracledb import Connection, Cursor
 from dataclasses import dataclass
 
 @dataclass
@@ -7,8 +8,8 @@ class Config:
     user: str|None = None
     password: str|None = None
     domain: str|None = None 
-    conn: bool|None = None
-    cur: str|None = None
+    conn: Connection|None = None
+    cur: Cursor|None = None
     shopid: int|None = None
 
 
