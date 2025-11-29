@@ -1,13 +1,9 @@
 import os
 from .config import Config
-from dotenv import load_dotenv
-import oracledb
-# import logging
 
 config = Config()
 
 def init():
-    # load_dotenv(".env")
     config.host = os.getenv("ORA_HOST")
     config.service = os.getenv("ORA_SERVICE")
     config.user = os.getenv("ORA_CR_USER")
