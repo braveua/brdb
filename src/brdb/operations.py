@@ -1,4 +1,5 @@
 import os
+import oracledb
 from .config import Config
 
 config = Config()
