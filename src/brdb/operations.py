@@ -11,21 +11,52 @@ def init():
     config.password = os.getenv("ORA_CR_PASSWORD")
 
 
-def connect(domain: str|None = None):
-    config.domain = domain
+def connect(*args, **kwargs):
+    init()    
+    if not config.domain:
+        config.domain = kwargs.get("domain")
+    if not config.dsn:
+        config.dsn = kwargs.get("dsn")
+    if not config.host:
+        config.host = kwargs.get("host")
+    if not config.service:  
+        config.service = kwargs.get("service")
+    if not config.user:
+        config.user = kwargs.get("user")
+    if not config.password:
+        config.password = kwargs.get("password")
+    config.debug = kwargs.get("debug", False)
     try:
-        config.conn = oracledb.connect(
-            host=config.host,
-            service_name=config.service,
-            user=config.user,
-            password=config.password
+        if config.dsn:
+            if config.debug:
+                print("Connect by DSN")
+            config.conn = oracledb.connect(
+                dsn=config.dsn,
+                user=config.user,
+                password=config.password
+            )
+        else:
+            if config.debug:
+                print("Connect by HOST/SERVICE")    
+            config.conn = oracledb.connect(
+                host=config.host,
+                service_name=config.service,
+                user=config.user,
+                password=config.password
         )
         config.cur = config.conn.cursor()
-        config.shopid = config.cur.callfunc("sh.get_shopid", int, (config.domain,))
+        if config.domain:
+            config.shopid = config.cur.callfunc("sh.get_shopid", int, (config.domain,))
     except Exception as err:
         print(f"Shop: Error connect to DB. {err}")
         exit(f"Ошибка подключения к базе данных. {err}")
     return config.conn, config.cur, config.shopid
+
+def disconnect():
+    if config.cur:
+        config.cur.close()
+    if config.conn:
+        config.conn.close()
 
 def save_shop_rec(rec: dict):
     if config.cur is None:
