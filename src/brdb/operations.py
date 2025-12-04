@@ -7,8 +7,10 @@ config = Config()
 def init():
     config.host = os.getenv("ORA_HOST")
     config.service = os.getenv("ORA_SERVICE")
+    config.port = int(os.getenv("ORA_PORT", 1521))
     config.user = os.getenv("ORA_CR_USER")
     config.password = os.getenv("ORA_CR_PASSWORD")
+    
 
 
 def connect(*args, **kwargs):
@@ -21,12 +23,15 @@ def connect(*args, **kwargs):
         config.host = kwargs.get("host")
     if not config.service:  
         config.service = kwargs.get("service")
-    if not config.user:
+    # if not config.user:
+    if kwargs.get("user"):
         config.user = kwargs.get("user")
-    if not config.password:
+    # if not config.password:
+    if kwargs.get("password"):
         config.password = kwargs.get("password")
     config.debug = kwargs.get("debug", False)
     try:
+        print(config)
         if config.dsn:
             if config.debug:
                 print("Connect by DSN")
