@@ -1,5 +1,5 @@
 from oracledb import Connection, Cursor
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class Config:
@@ -11,7 +11,9 @@ class Config:
     password: str|None = None
     domain: str|None = None 
     conn: Connection|None = None
+    # conn: Connection = field(init=False)
     cur: Cursor|None = None
+    # cur: Cursor = field(init=False)
     shopid: int|None = None
     debug: bool = False
 

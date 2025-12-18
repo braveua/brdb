@@ -1,9 +1,14 @@
-from .operations import config
+from .operations import config, connect
 import json
+import oracledb
 
 
-def get_shop(shop: dict):
-    shops = config.cur.execute("""
+def get_shops() -> list[dict]:
+    # if config.cur is None:
+    #     raise RuntimeError("Cursor not initialized")    
+    if config.conn is None:
+        connect()
+    shops = config.cur.execute("""    
         SELECT * FROM zakaz order by id
     """)
     # Get column names for dictionary keys (optional)
@@ -24,7 +29,19 @@ def get_shop(shop: dict):
     for shop in shops:
         print(f"shops: {shop}")
     # Serialize the list of dictionaries to a JSON string
-    json_output = json.dumps(data_as_dicts, indent=4)  # indent for pretty printing
+    # json_output = json.dumps(data_as_dicts, indent=4)  # indent for pretty printing
+    # print(json_output)
+    return data_as_dicts
 
-    print(json_output)
-
+def put_shop(shop: dict) -> None:
+    try:
+        config.cur.execute(
+            """
+            INSERT INTO zakaz (name, url, logo, code) VALUES (:name, :url, :logo, :code)
+            """,
+            shop
+        )
+    except oracledb.IntegrityError:
+        pass
+    config.conn.commit()
+    return 

@@ -31,7 +31,7 @@ def connect(*args, **kwargs):
         config.password = kwargs.get("password")
     config.debug = kwargs.get("debug", False)
     try:
-        print(config)
+        # print(config)
         if config.dsn:
             if config.debug:
                 print("Connect by DSN")
