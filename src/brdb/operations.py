@@ -15,8 +15,8 @@ def init():
 
 def connect(*args, **kwargs):
     init()    
-    if not config.domain:
-        config.domain = kwargs.get("domain")
+    # if not config.domain:
+    config.domain = kwargs.get("domain")
     if not config.dsn:
         config.dsn = kwargs.get("dsn")
     if not config.host:
